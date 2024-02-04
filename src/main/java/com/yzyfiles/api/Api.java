@@ -2,9 +2,7 @@ package com.yzyfiles.api;
 
 
 import com.yzyfiles.api.files.UploadedFile;
-import com.yzyfiles.api.repository.FileRepository;
-import com.yzyfiles.api.services.FileService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.yzyfiles.api.repository.UploadedFileRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 public class Api implements CommandLineRunner {
 
-	private final FileRepository fileRepository;
+	private final UploadedFileRepository fileRepository;
 
-	public Api(FileRepository fileRepository) {
+	public Api(UploadedFileRepository fileRepository) {
 		this.fileRepository = fileRepository;
 	}
 

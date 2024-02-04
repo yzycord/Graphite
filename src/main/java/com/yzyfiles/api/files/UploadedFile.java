@@ -31,7 +31,7 @@ public class UploadedFile {
 
     @Override
     public String toString() {
-        return "UploadedFile{" + "uploadId=" + this.uploadId + ", fileName='" + this.fileName + "}";
+        return "UploadedFile{" + "Id=" + this.id + ", " + "uploadId=" + this.uploadId + ", fileName='" + this.fileName + "}";
     }
 
 }
