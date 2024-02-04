@@ -5,16 +5,18 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Document
 public class UploadedFile {
 
     @Id
-    public String id; // the mongodb id
-
-    public String uploadId;
-    public String fileName;
+    private String id; // the mongodb id
+    private String uploadId;
+    private String fileName;
+    private LocalDateTime createdAt;
 
     public UploadedFile() {}
 
@@ -22,6 +24,7 @@ public class UploadedFile {
         this.id = id;
         this.uploadId = uploadId;
         this.fileName = fileName;
+        this.createdAt = LocalDateTime.now();
     }
 
     public UploadedFile(String uploadId, String fileName) {
