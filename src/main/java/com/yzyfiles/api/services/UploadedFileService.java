@@ -3,7 +3,9 @@ package com.yzyfiles.api.services;
 import com.yzyfiles.api.files.UploadedFile;
 import com.yzyfiles.api.repository.UploadedFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +29,8 @@ public class UploadedFileService {
             .findByUploadId(uploadId);
 
         if (uploadedFileById.isEmpty()) {
-            throw new IllegalStateException("Upload does not exist");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "A file with uploadId: " + uploadId + " was not found.");
         }
 
         return uploadedFileById.get();
@@ -40,7 +43,8 @@ public class UploadedFileService {
             .findByUploadId(uploadedFile.getUploadId());
 
         if (uploadedFileById.isPresent()) {
-            throw new IllegalStateException("Upload with this id already exists");
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                "A file with uploadId: " + uploadedFile.getId() + " already exists.");
         }
 
         uploadedFileRepository.save(uploadedFile);
@@ -49,13 +53,14 @@ public class UploadedFileService {
     }
 
     public UploadedFile deleteUploadedFile(String uploadId) {
-        // URGENT: THIS NEEDS AUTH
+        // TODO: [URGENT] THIS NEEDS AUTH
 
         Optional<UploadedFile> uploadedFileById = uploadedFileRepository
             .findByUploadId(uploadId);
 
         if (uploadedFileById.isEmpty()) {
-            throw new IllegalStateException("Upload does not exist");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "A file with uploadId: " + uploadId + " was not found.");
         }
 
         UploadedFile uploadedFile = uploadedFileById.get();
@@ -63,9 +68,5 @@ public class UploadedFileService {
 
         return uploadedFile;
     }
-
-    //public UploadedFile deleteUploadedFile() {
-    //    return null;
-    //}
 }
 

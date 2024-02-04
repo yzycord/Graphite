@@ -18,7 +18,7 @@ public class UploadedFile {
     private String id; // the mongodb id
     private String uploadId;
     private String fileName;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt; // when grabbing creation date convert to user timezone
 
     public UploadedFile() {}
 
