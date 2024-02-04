@@ -16,6 +16,7 @@ public class UploadedFile {
     private String id; // the mongodb id
     private String uploadId;
     private String fileName;
+
     private LocalDateTime createdAt;
 
     public UploadedFile() {}
@@ -30,6 +31,7 @@ public class UploadedFile {
     public UploadedFile(String uploadId, String fileName) {
         this.uploadId = uploadId;
         this.fileName = fileName;
+        this.createdAt = LocalDateTime.now();
     }
 
     @Override
