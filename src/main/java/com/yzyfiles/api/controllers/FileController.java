@@ -1,37 +1,43 @@
 package com.yzyfiles.api.controllers;
 
 import com.yzyfiles.api.files.UploadedFile;
-import com.yzyfiles.api.repository.FileRepository;
+import com.yzyfiles.api.services.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/file")
+@RequestMapping("api/v1/uploads")
 public class FileController {
 
-    private final FileRepository fileRepository;
-    FileController(FileRepository fileRepository) {
-        this.fileRepository = fileRepository;
+    private final FileService fileService;
+
+    @Autowired
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
     }
 
-    @GetMapping("uploads")
-    public List<UploadedFile> uploadedFiles() {
-        return fileRepository.findAll();
+    // api/v1/uploads
+    @GetMapping()
+    public List<UploadedFile> getUploadedFiles() {
+        return fileService.getUploadedFiles();
     }
 
-    @GetMapping("upload/{uploadId}")
+    @GetMapping("{uploadId}")
     @ResponseBody
     public UploadedFile getUploadedFile(@PathVariable String uploadId) {
-        return fileRepository.findByUploadId(uploadId);
+        return fileService.getUploadedFile(uploadId);
     }
 
+    // api/v1/uploads/{uploadId}
     // @PostMapping("upload/{uploadId}")
     // @ResponseBody
     // public UploadedFile postUploadedFile(@PathVariable String uploadId) {
     //     return json of file uploaded
     // }
 
+    // api/v1/uploads/{uploadId}
     // @DeleteMapping("upload/{uploadId}")
     // @ResponseBody
     // public UploadedFile deleteUploadedFile(@PathVariable String uploadId) {

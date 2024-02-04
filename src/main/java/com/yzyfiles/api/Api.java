@@ -3,20 +3,24 @@ package com.yzyfiles.api;
 
 import com.yzyfiles.api.files.UploadedFile;
 import com.yzyfiles.api.repository.FileRepository;
+import com.yzyfiles.api.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import java.io.File;
 
 @SpringBootApplication
-public class ApiApplication implements CommandLineRunner {
 
-	@Autowired
-	private FileRepository fileRepository;
+public class Api implements CommandLineRunner {
+
+	private final FileRepository fileRepository;
+
+	public Api(FileRepository fileRepository) {
+		this.fileRepository = fileRepository;
+	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiApplication.class, args);
+		SpringApplication.run(Api.class, args);
 	}
 
 	@Override
@@ -25,8 +29,8 @@ public class ApiApplication implements CommandLineRunner {
 		fileRepository.deleteAll();
 
 		// save a couple of customers
-		fileRepository.save(new UploadedFile("1", "Grail.mp3"));
-		fileRepository.save(new UploadedFile("2", "Digital Nas.mp3"));
+		fileRepository.save(new UploadedFile("abc123", "Grail.mp3"));
+		fileRepository.save(new UploadedFile("def456", "Digital Nas.wav"));
 
 		// fetch all customers
 		System.out.println("Files found with findAll():");
