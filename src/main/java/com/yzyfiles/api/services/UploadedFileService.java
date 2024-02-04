@@ -33,12 +33,18 @@ public class UploadedFileService {
         return uploadedFileById.get();
     }
 
-    //public UploadedFile createUploadedFile(UploadedFile uploadedFile) {
-    //    Optional<UploadedFile> uploadedFileById = uploadedFileRepository
-    //        .findByUploadId(uploadedFile.getUploadId());
-    //
-    //    return null;
-    //}
+    public UploadedFile createUploadedFile(UploadedFile uploadedFile) {
+        Optional<UploadedFile> uploadedFileById = uploadedFileRepository
+            .findByUploadId(uploadedFile.getUploadId());
+
+        if (uploadedFileById.isPresent()) {
+            throw new IllegalStateException("Upload with this id already exists");
+        }
+
+        uploadedFileRepository.save(uploadedFile);
+
+        return uploadedFile;
+    }
 
     //public UploadedFile deleteUploadedFile() {
     //    return null;
