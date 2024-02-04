@@ -1,12 +1,10 @@
 package com.yzyfiles.api.repository;
 
-import java.io.File;
-import java.util.List;
-
+import com.yzyfiles.api.files.UploadedFile;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface FileRepository extends MongoRepository<File, String> {
+public interface FileRepository extends MongoRepository<UploadedFile, String> {
 
-    public File findByUploadId(String id);
+    public UploadedFile findByUploadId(String uploadId);
 
 }
