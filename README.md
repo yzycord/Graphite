@@ -2,4 +2,4 @@
 ## Please add to this with pull requests.
 
 ### Todo List
-* the todo list
+* Someway to count views on a file

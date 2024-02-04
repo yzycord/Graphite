@@ -29,11 +29,11 @@ public class UploadedFileController {
         return fileService.getUploadedFile(uploadId);
     }
 
-    @PostMapping("upload")
-    @ResponseBody
-    public UploadedFile postUploadedFile(@RequestBody UploadedFile uploadedFile) {
-        return fileService.createUploadedFile(uploadedFile);
-    }
+    //@PostMapping("upload")
+    //@ResponseBody
+    //public UploadedFile postUploadedFile(@RequestBody UploadedFile uploadedFile) {
+    //    return fileService.createUploadedFile(uploadedFile);
+    //}
 
     // @DeleteMapping("upload/{uploadId}")
     // @ResponseBody
