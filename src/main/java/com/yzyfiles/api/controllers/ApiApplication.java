@@ -1,4 +1,4 @@
-package com.yzyfiles.api;
+package com.yzyfiles.api.controllers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
