@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface UploadedFileRepository extends MongoRepository<UploadedFile, String> {
 
     Optional<UploadedFile> findByUploadId(String uploadId);
-
 }

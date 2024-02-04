@@ -23,7 +23,7 @@ public class UploadedFileController {
         return fileService.getUploadedFiles();
     }
 
-    @GetMapping("{uploadId}")
+    @GetMapping(path = "{uploadId}")
     @ResponseBody
     public UploadedFile getUploadedFile(@PathVariable String uploadId) {
         return fileService.getUploadedFile(uploadId);
@@ -35,9 +35,9 @@ public class UploadedFileController {
         return fileService.createUploadedFile(uploadedFile);
     }
 
-    // @DeleteMapping("upload/{uploadId}")
-    // @ResponseBody
-    // public UploadedFile deleteUploadedFile(@PathVariable String uploadId) {
-    //     return json of file uploaded
-    // }
+    @DeleteMapping(path = "{uploadId}")
+    @ResponseBody
+    public UploadedFile deleteUploadedFile(@PathVariable String uploadId) {
+        return fileService.deleteUploadedFile(uploadId);
+    }
 }

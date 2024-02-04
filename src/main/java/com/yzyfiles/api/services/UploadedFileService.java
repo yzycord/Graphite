@@ -22,9 +22,9 @@ public class UploadedFileService {
         return uploadedFileRepository.findAll();
     }
 
-    public UploadedFile getUploadedFile(String uploadedId) {
+    public UploadedFile getUploadedFile(String uploadId) {
         Optional<UploadedFile> uploadedFileById = uploadedFileRepository
-            .findByUploadId(uploadedId);
+            .findByUploadId(uploadId);
 
         if (uploadedFileById.isEmpty()) {
             throw new IllegalStateException("Upload does not exist");
@@ -34,6 +34,8 @@ public class UploadedFileService {
     }
 
     public UploadedFile createUploadedFile(UploadedFile uploadedFile) {
+        // this needs auth
+
         Optional<UploadedFile> uploadedFileById = uploadedFileRepository
             .findByUploadId(uploadedFile.getUploadId());
 
@@ -42,6 +44,22 @@ public class UploadedFileService {
         }
 
         uploadedFileRepository.save(uploadedFile);
+
+        return uploadedFile;
+    }
+
+    public UploadedFile deleteUploadedFile(String uploadId) {
+        // URGENT: THIS NEEDS AUTH
+
+        Optional<UploadedFile> uploadedFileById = uploadedFileRepository
+            .findByUploadId(uploadId);
+
+        if (uploadedFileById.isEmpty()) {
+            throw new IllegalStateException("Upload does not exist");
+        }
+
+        UploadedFile uploadedFile = uploadedFileById.get();
+        uploadedFileRepository.deleteById(uploadedFile.getId());
 
         return uploadedFile;
     }
