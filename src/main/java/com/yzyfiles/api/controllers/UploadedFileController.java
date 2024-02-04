@@ -33,7 +33,7 @@ public class UploadedFileController {
     @PostMapping()
     @ResponseBody
     public UploadedFile postUploadedFile(@RequestBody UploadedFile uploadedFile
-        /*, @RequestPart("file") MultipartFile multipartFile)*/) {
+        /*, TODO: @RequestPart("file") MultipartFile multipartFile)*/) {
         return fileService.createUploadedFile(uploadedFile /*, multipartFile */);
     }
 
