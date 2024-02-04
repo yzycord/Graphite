@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Sensitive API shit ###
+*.log
+src/main/resources/application.yml
