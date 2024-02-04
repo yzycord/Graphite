@@ -25,8 +25,8 @@ public class ApiApplication implements CommandLineRunner {
 		fileRepository.deleteAll();
 
 		// save a couple of customers
-		fileRepository.save(new UploadedFile("Alice", "Smith"));
-		fileRepository.save(new UploadedFile("Bob", "Smith"));
+		fileRepository.save(new UploadedFile("1", "Grail.mp3"));
+		fileRepository.save(new UploadedFile("2", "Digital Nas.mp3"));
 
 		// fetch all customers
 		System.out.println("Files found with findAll():");

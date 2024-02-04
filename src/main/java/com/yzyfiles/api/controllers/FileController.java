@@ -2,9 +2,7 @@ package com.yzyfiles.api.controllers;
 
 import com.yzyfiles.api.files.UploadedFile;
 import com.yzyfiles.api.repository.FileRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +16,20 @@ public class FileController {
     }
 
     @GetMapping("uploads")
-    List<UploadedFile> all() {
+    public List<UploadedFile> uploadedFiles() {
         return fileRepository.findAll();
     }
+
+    @GetMapping("upload/{uploadId}")
+    @ResponseBody
+    public UploadedFile getUploadedFile(@PathVariable String uploadId) {
+        return fileRepository.findByUploadId(uploadId);
+    }
+
+    // @PostMapping("upload")
+    // @ResponseBody
+    // return json of file uploaded
+
+
+
 }
