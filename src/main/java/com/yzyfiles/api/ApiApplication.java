@@ -31,6 +31,7 @@ public class ApiApplication implements CommandLineRunner {
 		// fetch all customers
 		System.out.println("Files found with findAll():");
 		System.out.println("-------------------------------");
+
 		for (UploadedFile files : fileRepository.findAll()) {
 			System.out.println(files);
 		}

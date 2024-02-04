@@ -22,10 +22,10 @@ public class UploadedFile {
         this.uploadId = uploadId;
         this.fileName = fileName;
     }
+
     @Override
     public String toString() {
-        return String.format("{uploadId:%s,fileName:%s}", uploadId, fileName);
+        return "UploadedFile{" + "uploadId=" + this.uploadId + ", fileName='" + this.fileName + "}";
     }
-
 
 }
