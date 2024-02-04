@@ -26,10 +26,14 @@ public class FileController {
         return fileRepository.findByUploadId(uploadId);
     }
 
-    // @PostMapping("upload")
+    // @PostMapping("upload/{uploadId}")
     // @ResponseBody
     // return json of file uploaded
+    // public UploadedFile postUploadedFile(@PathVariable String uploadId) {
 
-
-
+    // @DeleteMapping("upload/{uploadId}")
+    // @ResponseBody
+    // public UploadedFile deleteUploadedFile(@PathVariable String uploadId) {
+    // return json of file deleted
+    
 }
