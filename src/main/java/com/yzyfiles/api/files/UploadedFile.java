@@ -20,6 +20,8 @@ public class UploadedFile {
     private String fileName;
     private LocalDateTime createdAt; // when grabbing creation date convert to user timezone
 
+    // private MultipartFile file; // future
+
     public UploadedFile() {}
 
     public UploadedFile(String uploadId, String fileName) {

@@ -4,6 +4,7 @@ import com.yzyfiles.api.files.UploadedFile;
 import com.yzyfiles.api.services.UploadedFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,8 +32,9 @@ public class UploadedFileController {
 
     @PostMapping()
     @ResponseBody
-    public UploadedFile postUploadedFile(@RequestBody UploadedFile uploadedFile) {
-        return fileService.createUploadedFile(uploadedFile);
+    public UploadedFile postUploadedFile(@RequestBody UploadedFile uploadedFile
+        /*, @RequestPart("file") MultipartFile multipartFile)*/) {
+        return fileService.createUploadedFile(uploadedFile /*, multipartFile */);
     }
 
     @DeleteMapping("{uploadId}")
