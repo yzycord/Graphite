@@ -2,8 +2,15 @@
 ## Please add to this with pull requests.
 
 # How to compile/run
-With maven installed:
-run the command ```mvn clean install```
+With maven installed OR using linux:
+run the command: 
+```bash
+mvn clean install
+```
 
 Without maven installed:
-run the ```mvn.cmd``` with args ```clean install```
+run the command:
+Windows:
+```bash
+mvn.cmd clean install
+```
