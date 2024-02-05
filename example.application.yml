@@ -31,3 +31,4 @@ springdoc:
 logging:
   file:
     name: graphite.log
+    path: /logs
