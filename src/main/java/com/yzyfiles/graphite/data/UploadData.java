@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Document
-public class FileData {
+public class UploadData {
     @Id
     private String id;
-    private String fileHash;
     private String uploadId;
+    private String fileHash;
     private String fileName;
     private String contentType;
     private LocalDateTime createdAt;

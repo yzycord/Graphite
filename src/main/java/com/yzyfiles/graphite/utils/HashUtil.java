@@ -1,14 +1,12 @@
-package com.yzyfiles.graphite;
+package com.yzyfiles.graphite.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.Random;
 
-public class GraphiteUtil {
-
+public class HashUtil {
     public static Optional<String> calculateMD5FileHash(MultipartFile multipartFile) {
         try {
             String hash = DigestUtils.md5Hex(multipartFile.getBytes());

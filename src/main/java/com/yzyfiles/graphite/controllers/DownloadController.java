@@ -1,6 +1,7 @@
 package com.yzyfiles.graphite.controllers;
 
-import com.yzyfiles.graphite.services.UploadedService;
+import com.yzyfiles.graphite.services.DownloadService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,14 +10,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/download")
 public class DownloadController {
 
-    private final UploadedService fileService;
+    private final DownloadService downloadService;
 
-    public DownloadController(UploadedService fileService) {
-        this.fileService = fileService;
+    @Autowired
+    public DownloadController(DownloadService downloadService) {
+        this.downloadService = downloadService;
     }
 
     @GetMapping("{uploadId}")
-    public ResponseEntity<byte[]> downloadById(@PathVariable String uploadId) {
-        return fileService.getUploadedFileBytesByFileHash(fileService.getUpload(uploadId));
+    public ResponseEntity<byte[]> downloadByFileData(@PathVariable String uploadId) {
+        return downloadService.downloadFile(uploadId);
     }
 }

@@ -1,7 +1,8 @@
 package com.yzyfiles.graphite.controllers;
 
-import com.yzyfiles.graphite.data.FileData;
-import com.yzyfiles.graphite.services.UploadedService;
+import com.yzyfiles.graphite.data.UploadData;
+import com.yzyfiles.graphite.services.UploadService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,32 +13,28 @@ import java.util.List;
 @RequestMapping("api/v1/uploads")
 public class UploadController {
 
-    private final UploadedService fileService;
+    private final UploadService uploadService;
 
-    public UploadController(UploadedService fileService) {
-        this.fileService = fileService;
+    @Autowired
+    public UploadController(UploadService uploadService) {
+        this.uploadService = uploadService;
     }
 
     @GetMapping
-    public List<FileData> getUploads() {
-        return fileService.getUploads();
+    public List<UploadData> getUploads() {
+        return uploadService.getUploads();
     }
 
     @GetMapping("{uploadId}")
     @ResponseBody
-    public FileData getFileById(@PathVariable String uploadId) {
-        return fileService.getUpload(uploadId);
+    public UploadData getUploadById(@PathVariable String uploadId) {
+        return uploadService.getUpload(uploadId);
     }
 
     @PostMapping
     @ResponseBody
-    public FileData createFile(@RequestParam("file") MultipartFile multipartFile) {
-        return fileService.createUploadedFile(multipartFile);
+    public UploadData createUpload(@RequestParam("file") MultipartFile multipartFile) {
+        // consider just returning id
+        return uploadService.createUpload(multipartFile);
     }
-
-//    @DeleteMapping("{uploadId}")
-//    @ResponseBody
-//    public UploadedFile deleteUploadedFile(@PathVariable String uploadId) {
-//        return fileService.deleteUploadedFile(uploadId);
-//    }
 }

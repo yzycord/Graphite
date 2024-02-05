@@ -26,7 +26,6 @@ public class ShutdownFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
         if (shutdownFlag.get()) {
-            // You can customize the response or log a message here
             response.getWriter().write("The application is shutting down. Please try again later.");
             response.flushBuffer();
         } else {
