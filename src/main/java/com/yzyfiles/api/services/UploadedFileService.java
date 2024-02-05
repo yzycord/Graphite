@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,22 +47,16 @@ public class UploadedFileService {
         return uploadedFileById.get();
     }
 
-    public UploadedFile createUploadedFile(UploadedFile uploadedFile, MultipartFile multipartFile) {
+    public UploadedFile createUploadedFile(MultipartFile multipartFile) {
         // this needs auth
 
-        Optional<UploadedFile> uploadedFileById = uploadedFileRepository
-            .findByUploadId(uploadedFile.getUploadId());
-
-        if (uploadedFileById.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT,
-                "A file with uploadId: " + uploadedFile.getId() + " already exists.");
-        }
+        String uploadId = System.currentTimeMillis() / 1000 + "-temp";
 
         Optional <String> fileHash = calculateMD5Hash(multipartFile);
 
         if (fileHash.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                "Error uploading uploadId: " + uploadedFile.getId() + " bad request data. Could not get hash.");
+                "Error uploading uploadId: " + uploadId + " bad request data. Could not get hash.");
         }
 
         Path filePath = Paths.get(uploadPath + "/" + fileHash + "/" + fileHash + ".file");
@@ -72,11 +67,16 @@ public class UploadedFileService {
                 Files.write(filePath, multipartFile.getBytes());
             } catch (IOException e) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Error uploading uploadId: " + uploadedFile.getId() + " bad request data. Could not write data.");
+                    "Error uploading uploadId: " + uploadId + " bad request data. Could not write data.");
             }
         }
 
+        UploadedFile uploadedFile = new UploadedFile();
         uploadedFile.setFileHash(fileHash.get());
+        uploadedFile.setUploadId(uploadId);
+        uploadedFile.setFileName(multipartFile.getOriginalFilename());
+        uploadedFile.setCreatedAt(LocalDateTime.now());
+
         uploadedFileRepository.save(uploadedFile);
 
         return uploadedFile;

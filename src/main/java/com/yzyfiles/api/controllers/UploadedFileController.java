@@ -32,9 +32,8 @@ public class UploadedFileController {
 
     @PostMapping()
     @ResponseBody
-    public UploadedFile postUploadedFile(@RequestBody UploadedFile uploadedFile,
-                                         @RequestPart("file") MultipartFile multipartFile) {
-        return fileService.createUploadedFile(uploadedFile, multipartFile);
+    public UploadedFile postUploadedFile(@RequestPart("file") MultipartFile multipartFile) {
+        return fileService.createUploadedFile(multipartFile);
     }
 
 //    @DeleteMapping("{uploadId}")
