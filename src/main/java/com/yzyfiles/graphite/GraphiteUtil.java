@@ -19,11 +19,11 @@ public class GraphiteUtil {
         }
     }
 
-    public static String calculateUploadIdHash(MultipartFile multipartFile) {
+    public static String calculateUploadIdHash(String fileHash) {
         Random random = new Random();
 
-        // i rather not convert to string, so I just have ":".
-        String hash = System.currentTimeMillis() + ":" + random.nextInt(1337) + ":" + multipartFile.toString();
+        //h i rather not convert to string, so I just have ":".
+        String hash = System.currentTimeMillis() + ":" + random.nextInt(1337) + ":" + fileHash;
         return DigestUtils.md5Hex(hash);
     }
 }

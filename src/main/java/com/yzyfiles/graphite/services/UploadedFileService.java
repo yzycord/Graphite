@@ -60,15 +60,14 @@ public class UploadedFileService {
 
 
 
-        String uploadId = GraphiteUtil.calculateUploadIdHash(multipartFile);
-
-        Optional <String> fileHash = GraphiteUtil.calculateMD5FileHash(multipartFile);
+        Optional<String> fileHash = GraphiteUtil.calculateMD5FileHash(multipartFile);
 
         if (fileHash.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                "Error uploading uploadId: " + uploadId + " bad request data. Could not get hash.");
+                "Error uploading. Bad request data. Could not get hash.");
         }
 
+        String uploadId = GraphiteUtil.calculateUploadIdHash(fileHash.get());
         Path directory = Paths.get(uploadPath + "/" + fileHash.get());
 
         // prevent dupes
