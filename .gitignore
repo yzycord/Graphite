@@ -35,3 +35,4 @@ build/
 ### Sensitive API shit ###
 *.log
 src/main/resources/application.yml
+/uploads/
