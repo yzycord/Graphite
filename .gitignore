@@ -36,4 +36,5 @@ build/
 *.log
 *.gz
 src/main/resources/application.yml
-/uploads/
+uploads/
+logs/
