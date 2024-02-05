@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.yzyfiles</groupId>
-	<artifactId>api</artifactId>
-	<version>0.1.0</version>
+	<artifactId>graphite</artifactId>
+	<version>0.2.0</version>
 	<name>api</name>
-	<description>YzyFiles API</description>
+	<description>Graphite API for YZYFiles</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

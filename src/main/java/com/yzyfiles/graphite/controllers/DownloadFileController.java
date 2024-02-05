@@ -1,6 +1,6 @@
-package com.yzyfiles.api.controllers;
+package com.yzyfiles.graphite.controllers;
 
-import com.yzyfiles.api.services.UploadedFileService;
+import com.yzyfiles.graphite.services.UploadedFileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

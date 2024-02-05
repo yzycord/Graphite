@@ -1,8 +1,8 @@
-package com.yzyfiles.api.services;
+package com.yzyfiles.graphite.services;
 
-import com.yzyfiles.api.GraphiteUtil;
-import com.yzyfiles.api.files.UploadedFile;
-import com.yzyfiles.api.repository.UploadedFileRepository;
+import com.yzyfiles.graphite.GraphiteUtil;
+import com.yzyfiles.graphite.files.UploadedFile;
+import com.yzyfiles.graphite.repository.UploadedFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;

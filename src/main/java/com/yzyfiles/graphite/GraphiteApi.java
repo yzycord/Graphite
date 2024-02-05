@@ -1,24 +1,24 @@
-package com.yzyfiles.api;
+package com.yzyfiles.graphite;
 
 
-import com.yzyfiles.api.files.UploadedFile;
-import com.yzyfiles.api.repository.UploadedFileRepository;
+import com.yzyfiles.graphite.files.UploadedFile;
+import com.yzyfiles.graphite.repository.UploadedFileRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 
-public class Graphite implements CommandLineRunner {
+public class GraphiteApi implements CommandLineRunner {
 
 	private final UploadedFileRepository fileRepository;
 
-	public Graphite(UploadedFileRepository fileRepository) {
+	public GraphiteApi(UploadedFileRepository fileRepository) {
 		this.fileRepository = fileRepository;
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Graphite.class, args);
+		SpringApplication.run(GraphiteApi.class, args);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.yzyfiles.api;
+package com.yzyfiles.graphite;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,4 +1,4 @@
-package com.yzyfiles.api;
+package com.yzyfiles.graphite;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package com.yzyfiles.api.repository;
+package com.yzyfiles.graphite.repository;
 
-import com.yzyfiles.api.files.UploadedFile;
+import com.yzyfiles.graphite.files.UploadedFile;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

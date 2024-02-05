@@ -1,4 +1,4 @@
-package com.yzyfiles.api.controllers;
+package com.yzyfiles.graphite.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

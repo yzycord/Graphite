@@ -1,9 +1,7 @@
-package com.yzyfiles.api.controllers;
+package com.yzyfiles.graphite.controllers;
 
-import com.yzyfiles.api.files.UploadedFile;
-import com.yzyfiles.api.services.UploadedFileService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.yzyfiles.graphite.files.UploadedFile;
+import com.yzyfiles.graphite.services.UploadedFileService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
