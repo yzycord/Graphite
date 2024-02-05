@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -16,11 +17,10 @@ public class UploadedFile {
 
     @Id
     private String id; // the mongodb id
+    private String fileHash;
     private String uploadId;
     private String fileName;
     private LocalDateTime createdAt; // when grabbing creation date convert to user timezone
-
-    // private MultipartFile file; // future
 
     public UploadedFile() {}
 

@@ -3,7 +3,14 @@ server:
   error:
     include-message: "always"
 
+graphite:
+  upload-path: "uploads"
+
 spring:
+  servlet:
+    multipart:
+      max-file-size: 250MB
+      max-request-size: 500MB
   main:
     web-application-type: servlet
   data:

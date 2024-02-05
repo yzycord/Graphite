@@ -9,26 +9,26 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 
-public class Api implements CommandLineRunner {
+public class Graphite implements CommandLineRunner {
 
 	private final UploadedFileRepository fileRepository;
 
-	public Api(UploadedFileRepository fileRepository) {
+	public Graphite(UploadedFileRepository fileRepository) {
 		this.fileRepository = fileRepository;
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Api.class, args);
+		SpringApplication.run(Graphite.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		fileRepository.deleteAll();
+		//fileRepository.deleteAll();
 
 		// save a couple of customers
-		fileRepository.save(new UploadedFile("abc123", "Grail.mp3"));
-		fileRepository.save(new UploadedFile("def456", "Digital Nas.wav"));
+		//fileRepository.save(new UploadedFile("abc123", "Grail.mp3"));
+		//fileRepository.save(new UploadedFile("def456", "Digital Nas.wav"));
 
 		// fetch all customers
 		System.out.println("Files found with findAll():");
