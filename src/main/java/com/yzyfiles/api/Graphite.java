@@ -24,12 +24,6 @@ public class Graphite implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		//fileRepository.deleteAll();
-
-		// save a couple of customers
-		//fileRepository.save(new UploadedFile("abc123", "Grail.mp3"));
-		//fileRepository.save(new UploadedFile("def456", "Digital Nas.wav"));
-
 		// fetch all customers
 		System.out.println("Files found with findAll():");
 		System.out.println("-------------------------------");

@@ -1,8 +1,8 @@
 package com.yzyfiles.api.services;
 
+import com.yzyfiles.api.GraphiteUtil;
 import com.yzyfiles.api.files.UploadedFile;
 import com.yzyfiles.api.repository.UploadedFileRepository;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -51,9 +51,9 @@ public class UploadedFileService {
     public UploadedFile createUploadedFile(MultipartFile multipartFile) {
         // this needs auth
 
-        String uploadId = System.currentTimeMillis() / 1000 + "-temp";
+        String uploadId = GraphiteUtil.calculateUploadIdHash(multipartFile);
 
-        Optional <String> fileHash = calculateMD5Hash(multipartFile);
+        Optional <String> fileHash = GraphiteUtil.calculateMD5FileHash(multipartFile);
 
         if (fileHash.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -126,16 +126,6 @@ public class UploadedFileService {
 //
 //        return uploadedFile;
 //    }
-
-    public static Optional<String> calculateMD5Hash(MultipartFile file) {
-        try {
-            String hash = DigestUtils.md5Hex(file.getBytes());
-            return Optional.of(hash);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Optional.empty(); // Return an empty Optional if an error occurs
-        }
-    }
 
     //public static MultipartFile downloadFile() { return null; }
 
