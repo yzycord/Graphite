@@ -20,6 +20,7 @@ public class UploadedFile {
     private String fileHash;
     private String uploadId;
     private String fileName;
+    private String contentType;
     private LocalDateTime createdAt; // when grabbing creation date convert to user timezone
 
     public UploadedFile() {}

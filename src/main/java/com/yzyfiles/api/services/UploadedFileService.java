@@ -5,12 +5,13 @@ import com.yzyfiles.api.repository.UploadedFileRepository;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -68,9 +69,8 @@ public class UploadedFileService {
                 Path filePath = directory.resolve(fileHash.get() + ".file");
                 Files.write(filePath, multipartFile.getBytes());
             } catch (IOException e) {
-                e.printStackTrace();
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Error uploading uploadId: " + uploadId + " bad request data. Could not write data.");
+                    "Error uploading uploadId: " + uploadId + " bad request data. Could not write data.", e);
             }
         }
 
@@ -78,6 +78,7 @@ public class UploadedFileService {
         uploadedFile.setFileHash(fileHash.get());
         uploadedFile.setUploadId(uploadId);
         uploadedFile.setFileName(multipartFile.getOriginalFilename());
+        uploadedFile.setContentType(multipartFile.getContentType());
         uploadedFile.setCreatedAt(LocalDateTime.now());
 
         uploadedFileRepository.save(uploadedFile);
@@ -85,22 +86,46 @@ public class UploadedFileService {
         return uploadedFile;
     }
 
-    public UploadedFile deleteUploadedFile(String uploadId) {
-        // TODO: [URGENT] THIS NEEDS AUTH
+    public ResponseEntity<byte[]> getUploadedFileBytesByFileHash(UploadedFile uploadedFile) {
+        
+        // this just feels messy but idk
 
-        Optional<UploadedFile> uploadedFileById = uploadedFileRepository
-            .findByUploadId(uploadId);
+        String fileHash = uploadedFile.getFileHash();
+        Path filePath = Paths.get(uploadPath, fileHash, fileHash + ".file");
 
-        if (uploadedFileById.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                "A file with uploadId: " + uploadId + " was not found.");
+        try(InputStream inputStream = Files.newInputStream(filePath)) {
+            byte[] fileBytes = inputStream.readAllBytes();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.valueOf(uploadedFile.getContentType()));
+            ContentDisposition contentDisposition = ContentDisposition
+                    .builder("attachment")
+                    .filename(uploadedFile.getFileName())
+                    .build();
+            headers.setContentDisposition(contentDisposition);
+
+            return new ResponseEntity<>(fileBytes, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "File bytes were not found", e);
         }
-
-        UploadedFile uploadedFile = uploadedFileById.get();
-        uploadedFileRepository.deleteById(uploadedFile.getId());
-
-        return uploadedFile;
     }
+
+//    public UploadedFile deleteUploadedFile(String uploadId) {
+//        // TODO: [URGENT] THIS NEEDS AUTH
+//
+//        Optional<UploadedFile> uploadedFileById = uploadedFileRepository
+//            .findByUploadId(uploadId);
+//
+//        if (uploadedFileById.isEmpty()) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+//                "A file with uploadId: " + uploadId + " was not found.");
+//        }
+//
+//        UploadedFile uploadedFile = uploadedFileById.get();
+//        uploadedFileRepository.deleteById(uploadedFile.getId());
+//
+//        return uploadedFile;
+//    }
 
     public static Optional<String> calculateMD5Hash(MultipartFile file) {
         try {
