@@ -11,7 +11,7 @@
 	<groupId>com.yzyfiles</groupId>
 	<artifactId>graphite</artifactId>
 	<version>0.2.0</version>
-	<name>api</name>
+	<name>graphite</name>
 	<description>Graphite API for YZYFiles</description>
 	<properties>
 		<java.version>17</java.version>
