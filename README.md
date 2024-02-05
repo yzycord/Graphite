@@ -2,15 +2,15 @@
 ## Please add to this with pull requests.
 
 # How to compile/run
+First make sure your in the parent directory.
+
 With maven installed OR using linux:
-run the command: 
-```bash
+```console
 mvn clean install
 ```
 
 Without maven installed:
-run the command:
 Windows:
-```bash
+```console
 mvn.cmd clean install
 ```
