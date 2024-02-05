@@ -17,7 +17,7 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: yzyfiles
+      database: graphite
       username: admin
       password: password
 
@@ -28,4 +28,4 @@ springdoc:
 
 logging:
   file:
-    name: yzyfiles-api.log
+    name: graphite.log

@@ -9,16 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 
-public class GraphiteApi implements CommandLineRunner {
+public class Graphite implements CommandLineRunner {
 
 	private final UploadedFileRepository fileRepository;
 
-	public GraphiteApi(UploadedFileRepository fileRepository) {
+	public Graphite(UploadedFileRepository fileRepository) {
 		this.fileRepository = fileRepository;
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(GraphiteApi.class, args);
+		SpringApplication.run(Graphite.class, args);
 	}
 
 	@Override
