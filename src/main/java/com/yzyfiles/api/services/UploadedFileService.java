@@ -59,13 +59,16 @@ public class UploadedFileService {
                 "Error uploading uploadId: " + uploadId + " bad request data. Could not get hash.");
         }
 
-        Path filePath = Paths.get(uploadPath + "/" + fileHash + "/" + fileHash + ".file");
+        Path directory = Paths.get(uploadPath + "/" + fileHash.get());
 
         // prevent dupes
-        if (!Files.exists(filePath)) {
+        if (!Files.exists(directory)) {
             try {
+                Files.createDirectories(directory);
+                Path filePath = directory.resolve(fileHash.get() + ".file");
                 Files.write(filePath, multipartFile.getBytes());
             } catch (IOException e) {
+                e.printStackTrace();
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Error uploading uploadId: " + uploadId + " bad request data. Could not write data.");
             }
