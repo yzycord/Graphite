@@ -52,6 +52,14 @@ public class UploadedFileService {
     public UploadedFile createUploadedFile(MultipartFile multipartFile) {
         // this needs auth
 
+
+
+
+        // TODO: Check if a file was even passed
+
+
+
+
         String uploadId = GraphiteUtil.calculateUploadIdHash(multipartFile);
 
         Optional <String> fileHash = GraphiteUtil.calculateMD5FileHash(multipartFile);
