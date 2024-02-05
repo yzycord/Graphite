@@ -2,7 +2,9 @@
 ## Please add to this with pull requests.
 
 # How to compile/run
-First make sure your in the parent directory.
+1. First make sure your in the parent directory.
+
+2. run the command below
 
 With maven installed OR using linux:
 ```console
