@@ -19,11 +19,7 @@ public class GraphiteUtil {
         }
     }
 
-    public static String calculateUploadIdHash(MultipartFile multipartFile) {
-        Random random = new Random();
-
-        // i rather not convert to string, so I just have ":".
-        String hash = System.currentTimeMillis() + ":" + random.nextInt(1337) + ":" + multipartFile.toString();
-        return DigestUtils.md5Hex(hash);
+    public static String calculateUploadIdHash() {
+        return DigestUtils.md5Hex(String.valueOf(System.currentTimeMillis()));
     }
 }

@@ -1,36 +1,37 @@
 package com.yzyfiles.graphite.controllers;
 
-import com.yzyfiles.graphite.files.UploadedFile;
-import com.yzyfiles.graphite.services.UploadedFileService;
+import com.yzyfiles.graphite.data.FileData;
+import com.yzyfiles.graphite.services.UploadedService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/v1/uploads")
-public class UploadedFileController {
+public class UploadController {
 
-    private final UploadedFileService fileService;
+    private final UploadedService fileService;
 
-    public UploadedFileController(UploadedFileService fileService) {
+    public UploadController(UploadedService fileService) {
         this.fileService = fileService;
     }
 
-    @GetMapping()
-    public List<UploadedFile> getUploadedFiles() {
-        return fileService.getUploadedFiles();
+    @GetMapping
+    public List<FileData> getUploads() {
+        return fileService.getUploads();
     }
 
     @GetMapping("{uploadId}")
     @ResponseBody
-    public UploadedFile getUploadedFile(@PathVariable String uploadId) {
-        return fileService.getUploadedFile(uploadId);
+    public FileData getFileById(@PathVariable String uploadId) {
+        return fileService.getUpload(uploadId);
     }
 
-    @PostMapping()
+    @PostMapping
     @ResponseBody
-    public UploadedFile postUploadedFile(@RequestParam("file") MultipartFile multipartFile) {
+    public FileData createFile(@RequestParam("file") MultipartFile multipartFile) {
         return fileService.createUploadedFile(multipartFile);
     }
 
