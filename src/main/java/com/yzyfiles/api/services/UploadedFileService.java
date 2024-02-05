@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -67,10 +68,20 @@ public class UploadedFileService {
             try {
                 Files.createDirectories(directory);
                 Path filePath = directory.resolve(fileHash.get() + ".file");
-                Files.write(filePath, multipartFile.getBytes());
+
+                try (OutputStream outputStream = Files.newOutputStream(filePath)) {
+                    byte[] buffer = new byte[1024];
+                    int bytesRead;
+                    while ((bytesRead = multipartFile.getInputStream().read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                } catch (IOException e) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Error uploading uploadId: " + uploadId + " bad request data. Could not write data.", e);
+                }
             } catch (IOException e) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Error uploading uploadId: " + uploadId + " bad request data. Could not write data.", e);
+                    "Error uploading uploadId: " + uploadId + " bad request data. Could not create directories.", e);
             }
         }
 
